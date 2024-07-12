@@ -15,19 +15,19 @@
 <form id="form" class="hidden">
     <div class="form-group">    
         <label for="author-form">Author</label>
-        <input type="text" id="author-form" name="author" autofocus>
+        <input type="text" id="author-form" name="author" pattern="[ a-zA-Z-',.]+">
     </div>
 <div class="form-group">
     <label for="title-form">Title</label>
-    <input type="text" id="title-form" name="title">
+    <input type="text" id="title-form" name="title" pattern="[ a-zA-Z0-9-',.]+">
 </div>
 <div class="form-group">
     <label for="pages-form">Number of Pages</label>
-    <input type="text" id="pages-form" name="pages">
+    <input type="text" id="pages-form" name="pages" pattern="[0-9]+">
 </div>
 <div class="form-group">
     <label for="read-form">Read (YES/NO)</label>
-    <input type="text" id="read-form" name="read">
+    <input type="text" id="read-form" name="read" pattern="YES|NO">
 </div>
     <button type="submit">Add Book!</button>
 </form>

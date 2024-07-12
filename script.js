@@ -33,11 +33,12 @@ function showBooks(){
           <h2>Title:</h2>
           <span id="title">${book.title}</span>
           <p>Pages: <span id="pages">${book.pages}</span></p>    
-          <p class="read-btn" data-attribute='${i}'>Read: <span id="read">${book.read}</span></p>         
+          <p class="read-btn" data-attribute='${i}'>Read(change): <span id="read">${book.read}</span></p>         
       </div> `;
       container.insertAdjacentHTML("beforeend",content)
   })
 }
+
 
 addBtn.addEventListener('click',()=>{form.classList.remove('hidden');
   authorInput.focus()
@@ -53,9 +54,9 @@ form.reset();
 
 container.addEventListener('click',(e)=>{
   const bookNumber=e.target.dataset.attribute;
-    if([...e.target.classList].includes('remove')){
-myLibrary.splice(bookNumber,1);
-showBooks();
+  if([...e.target.classList].includes('remove')){
+    myLibrary.splice(bookNumber,1);
+    showBooks();
   }
   else if([...e.target.classList].includes('read-btn')){
     myLibrary[bookNumber].read=myLibrary[bookNumber].read==='YES'?'NO':'YES'

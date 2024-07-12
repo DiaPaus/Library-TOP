@@ -11,6 +11,12 @@ function Book(author,title,pages,read) {
   this.read=read;
 }
 
+
+//Method to change read status
+Book.prototype.changeReadStatus=function(){
+  this.read=this.read==='YES'?'NO':'YES';
+}
+
 function addBookToLibrary(author,title,pages,read) {
   myLibrary.push(new Book(author,title,pages,read));
   console.log(myLibrary);
@@ -63,7 +69,7 @@ container.addEventListener('click',(e)=>{
     showBooks();
   }
   else if([...e.target.classList].includes('read-btn')){
-    myLibrary[bookNumber].read=myLibrary[bookNumber].read==='YES'?'NO':'YES'
+    myLibrary[bookNumber].changeReadStatus();
     showBooks();
       }
   })

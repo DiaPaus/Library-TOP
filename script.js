@@ -40,10 +40,12 @@ function showBooks(){
 }
 
 
+// Open form to add new book
 addBtn.addEventListener('click',()=>{form.classList.remove('hidden');
   authorInput.focus()
 });
 
+//Submit form
 form.addEventListener('submit',(e)=>{
 e.preventDefault();
 addBookToLibrary(form.author.value,form.title.value,form.pages.value,form.read.value);
@@ -52,6 +54,8 @@ form.classList.add('hidden');
 form.reset();
 });
 
+
+// Remove book or change read status
 container.addEventListener('click',(e)=>{
   const bookNumber=e.target.dataset.attribute;
   if([...e.target.classList].includes('remove')){

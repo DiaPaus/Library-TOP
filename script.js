@@ -2,8 +2,7 @@ const myLibrary = [];
 const container=document.querySelector('.container');
 const addBtn=document.querySelector('.add');
 const form=document.querySelector('#form');
-const submitBtn=document.querySelector(`#form button`);
-let removeBtns;
+const authorInput=document.querySelector('#author-form');
 
 function Book(author,title,pages,read) {
   this.author=author;
@@ -17,7 +16,6 @@ function addBookToLibrary(author,title,pages,read) {
   console.log(myLibrary);
 }
 
-
 // addBookToLibrary("Mary Sebag-Montefiore","The story of Heidi ",64,"NO");
 // addBookToLibrary("Keene Carolyn","By the Light of the Study Lamp",215,"NO");
 // addBookToLibrary("A.J. Macgregor"," Lost at the fair",51,"NO");
@@ -29,34 +27,21 @@ function showBooks(){
   container.innerHTML='';
   myLibrary.forEach((book,i)=>{
     let content=`<div class="book-item">
-          <i class="fa-solid fa-xmark remove"></i>
+          <i class="fa-solid fa-xmark remove" data-attribute='${i}'></i>
           <h2>Author:</h2>
           <span id="author">${book.author}</span>
           <h2>Title:</h2>
           <span id="title">${book.title}</span>
           <p>Pages: <span id="pages">${book.pages}</span></p>    
-          <p class="read-btn">Read: <span id="read">${book.read}</span></p>         
+          <p class="read-btn" data-attribute='${i}'>Read: <span id="read">${book.read}</span></p>         
       </div> `;
       container.insertAdjacentHTML("beforeend",content)
   })
-  removeBtns=document.querySelectorAll('.remove');
-  removeBtns.forEach((btn,i)=>{
-    btn.addEventListener('click',()=>{
-      myLibrary.splice(i,1);
-      showBooks();    
-       })
-  })
-
-  readBtns=document.querySelectorAll('.read-btn');
-  readBtns.forEach((readBtn,i)=>{
-    readBtn.addEventListener('click',()=>{
-      myLibrary[i].read=myLibrary[i].read==='NO'?'YES':'NO';
-      showBooks()
-    })
-  })
 }
 
-addBtn.addEventListener('click',()=>form.classList.remove('hidden'));
+addBtn.addEventListener('click',()=>{form.classList.remove('hidden');
+  authorInput.focus()
+});
 
 form.addEventListener('submit',(e)=>{
 e.preventDefault();
@@ -66,3 +51,14 @@ form.classList.add('hidden');
 form.reset();
 });
 
+container.addEventListener('click',(e)=>{
+  const bookNumber=e.target.dataset.attribute;
+    if([...e.target.classList].includes('remove')){
+myLibrary.splice(bookNumber,1);
+showBooks();
+  }
+  else if([...e.target.classList].includes('read-btn')){
+    myLibrary[bookNumber].read=myLibrary[bookNumber].read==='YES'?'NO':'YES'
+    showBooks();
+      }
+  })

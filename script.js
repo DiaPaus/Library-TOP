@@ -4,18 +4,19 @@ const addBtn=document.querySelector('.add');
 const form=document.querySelector('#form');
 const authorInput=document.querySelector('#author-form');
 
-function Book(author,title,pages,read) {
-  this.author=author;
-  this.title=title;
-  this.pages=pages;
-  this.read=read;
+
+class Book{
+  constructor(author,title,pages,read) {
+      this.author=author;
+      this.title=title;
+      this.pages=pages;
+      this.read=read;
+    }
+    changeReadStatus=function(){
+        this.read=this.read==='YES'?'NO':'YES';
+      }
 }
 
-
-//Method to change read status
-Book.prototype.changeReadStatus=function(){
-  this.read=this.read==='YES'?'NO':'YES';
-}
 
 function addBookToLibrary(author,title,pages,read) {
   myLibrary.push(new Book(author,title,pages,read));
